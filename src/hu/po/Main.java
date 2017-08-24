@@ -3,6 +3,8 @@
 package hu.po;
 
 
+import java.util.Random;
+
 public class Main {
     public static boolean isRaining = false;
 
@@ -27,7 +29,7 @@ public class Main {
 
     private static void simulateRace() {
         System.out.println("This is simulateRace");
-        isRaining = (int)(Math.random()*100) <= 30; // "30" is the predefined probability"
+        isRaining = getRandom(0, 100) <= 30; // "30" is the predefined probability"
         System.out.println("Is raining -> " + isRaining + "\n");
     }
 
@@ -37,6 +39,13 @@ public class Main {
         System.out.println("This is printRaceResult\n");
     }
 
+
+    public static int getRandom(int low, int high) {
+        int randNum;
+        Random rand = new Random();
+        randNum = rand.nextInt((high + 1) - low) + low;
+        return randNum;
+    }
 
 }
 
