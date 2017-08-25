@@ -8,22 +8,12 @@ import java.util.Random;
 import java.util.Set;
 
 public class Main {
-    public static final String[] CARNAMES = {"Dragon",
-                                             "Dawn",
-                                             "Silver",
-                                             "Vagabond",
-                                             "Tigress",
-                                             "Quicksilver",
-                                             "Centurion",
-                                             "Desire",
-                                             "Eos",
-                                             "Intro",
-                                            };
 
-    public static final int NUMRACERS = 10;
-    public static final int RACELENGTH = 50;
+    private static Car[] listOfCars;
+    static final int NUMRACERS = 3;
+    private static final int RACELENGTH = 5;
 
-    public static boolean isRaining = false;
+    private static boolean isRaining;
 
 
     public static void main(String[] args) {
@@ -31,37 +21,56 @@ public class Main {
 
         System.out.println("This is the main method\n");
 
-        createVehicle();
+        createVehicle(NUMRACERS);
         simulateRace();
-        printRaceResult();
+        //printRaceResult();
 
-        System.out.println("The picked TruckNames are: \n" + getUniqueTruckNames(10, 1, 20));
-        System.out.println("The picked CarNames are: \n" + getUniqueCarNames(10));
     }
 
 
-
-    private static void createVehicle() {
-        System.out.println("This is createVehicle\n");
-
+    /** Create vehicles */
+    private static void createVehicle(int NUMRACERS) {
+        listOfCars = new Car[NUMRACERS];
+        for (int i = 0; i < NUMRACERS; i++) {
+            listOfCars[i] = new Car();
+            Car.racerNumber++;
+        }
     }
 
 
 
     private static void simulateRace() {
-        System.out.println("This is simulateRace");
-        isRaining = getRandom(0, 100) <= 30; // "30" is the predefined probability"
-        System.out.println("Is raining -> " + isRaining + "\n");
+        //System.out.println("Is raining -> " + isRaining + "\n");
+        for (int hour = 1; hour <= RACELENGTH; hour++) {
+            isRaining = getRandom(0, 100) <= 30; // "30" is the predefined probability"
+
+            System.out.printf("Hours: %s \n", hour);
+            for (Car car : listOfCars) {
+                car.setSpeed();
+                car.moveForAnHour();
+
+
+            }
+            printRaceResult();
+            System.out.println();
+        }
+
     }
 
 
 
     private static void printRaceResult() {
-        System.out.println("This is printRaceResult\n");
+        //System.out.printf("Name: %s -> Distance: %d \n", Car.name, Car.distanceTraveled);
+        for (Car vehicle : listOfCars) {
+
+            System.out.printf("Name: %s -> Speed: %d -> Distance: %d \n", vehicle.name,
+                    vehicle.normalSpeed,
+                    vehicle.distanceTraveled);
+        }
     }
 
 
-    public static int getRandom(int low, int high) {
+    static int getRandom(int low, int high) {
         int randNum;
         Random rand = new Random();
         randNum = rand.nextInt((high + 1) - low) + low;
@@ -69,7 +78,7 @@ public class Main {
     }
 
 
-    public static Set<Integer> getUniqueTruckNames(int size, int low, int high) {
+    private static Set<Integer> getUniqueTruckNames(int size, int low, int high) {
         Set<Integer> uniqueTruckNames = new HashSet<>();
         while (uniqueTruckNames.size() < size) {
             uniqueTruckNames.add(getRandom(low, high));
@@ -78,25 +87,7 @@ public class Main {
     }
 
 
-    public static Set<String> getUniqueCarNames(int size) {
-        Set<String> uniqueCarNames = new HashSet<>();
-        int index1;
-        int index2;
-        String fullCarName;
 
-        while (uniqueCarNames.size() < size) {
-            index1 = getRandom(0, (CARNAMES.length - 1));
-            // minVal = (a < b) ? a : b;
-            index2 = getRandom(1, (CARNAMES.length - 1));
-            index2 = index1 != index2 ? index2 : (index2 - 1);
-            System.out.println("Index1: " + index1);
-            System.out.println("Index1: " + index2);
-            fullCarName = CARNAMES[index1] + " " + CARNAMES[index2];
-            uniqueCarNames.add(fullCarName);
-            // System.out.println("Index: " + (possibleNames.length -1));
-        }
-        return uniqueCarNames;
-    }
 
 
 }
