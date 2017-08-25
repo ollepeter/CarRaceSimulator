@@ -12,8 +12,9 @@ public class Main {
     private static Car[] listOfCars;
     static final int NUMRACERS = 3;
     private static final int RACELENGTH = 5;
+    private static final int SPEEDLIMIT = 70;
 
-    private static boolean isRaining;
+    static boolean isRaining;
 
 
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class Main {
 
         createVehicle(NUMRACERS);
         simulateRace();
-        //printRaceResult();
+        printRaceResult();
 
     }
 
@@ -46,15 +47,27 @@ public class Main {
 
             System.out.printf("Hours: %s \n", hour);
             for (Car car : listOfCars) {
-                car.setSpeed();
+                car.setSpeedLimit(isRaining, SPEEDLIMIT);
                 car.moveForAnHour();
 
 
             }
-            printRaceResult();
+            printActualRaceResult();
             System.out.println();
         }
 
+    }
+
+
+
+    private static void printActualRaceResult() {
+        //System.out.printf("Name: %s -> Distance: %d \n", Car.name, Car.distanceTraveled);
+        for (Car vehicle : listOfCars) {
+
+            System.out.printf("Name: %s -> Speed: %d -> Distance: %d \n", vehicle.name,
+                    vehicle.normalSpeed,
+                    vehicle.distanceTraveled);
+        }
     }
 
 
@@ -68,7 +81,6 @@ public class Main {
                     vehicle.distanceTraveled);
         }
     }
-
 
     static int getRandom(int low, int high) {
         int randNum;

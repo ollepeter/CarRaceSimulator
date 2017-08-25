@@ -24,13 +24,14 @@ class Car {
     }
 
 
-    static void setSpeedLimit() {
-
+    void setSpeedLimit(boolean isRaining, int speedLimit ) {
+        if (isRaining) {
+            normalSpeed = speedLimit;
+        } else {
+            normalSpeed = Main.getRandom(80, 110);
+        }
     }
 
-    void setSpeed() {
-        normalSpeed = Main.getRandom(80, 110);
-    }
 
 
     void moveForAnHour () {
