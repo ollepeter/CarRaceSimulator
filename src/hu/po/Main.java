@@ -8,8 +8,8 @@ import java.util.Random;
 
 
 public class Main {
-    static final int NUMRACERS = 10;
-    private static final int RACELENGTH = 50;
+    static final int NUMRACERS = 1;
+    private static final int RACELENGTH = 100;
     private static final int SPEEDLIMIT = 70;
 
     private static Car[] listOfCars;
@@ -46,7 +46,7 @@ public class Main {
     private static void simulateRace() {
         for (int hour = 1; hour <= RACELENGTH; hour++) {
             boolean isRaining = getRandom(0, 100) <= 30; // "30" is the predefined probability"
-            
+
             for (Car car : listOfCars) {
                 car.setSpeedLimit(isRaining, SPEEDLIMIT);
                 car.moveForAnHour();
@@ -58,7 +58,7 @@ public class Main {
             }
 
             for (Truck truck : listOfTrucks) {
-                truck.setSpeedLimit(isRaining, SPEEDLIMIT);
+                truck.setSpeed();
                 truck.moveForAnHour();
             }
             printActualRaceResult(hour, isRaining);
