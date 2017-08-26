@@ -33,11 +33,9 @@ class Car {
     }
 
 
-
     void moveForAnHour () {
         distanceTraveled += normalSpeed;
     }
-
 
 
     // Get a list with unique names for Cars
