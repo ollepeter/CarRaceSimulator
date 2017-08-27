@@ -6,9 +6,8 @@ class Truck {
     String name;
     int normalSpeed;
     private int breakdownTurnsLeft;
-    private int breakdownSpeed = 0;
     int distanceTraveled;
-    boolean isBreakDown = false;
+    private boolean isBreakDown = false;
 
     // The constructor
     Truck() {
@@ -20,27 +19,24 @@ class Truck {
 
 
     void setSpeed() {
-        switch (breakdownTurnsLeft) {
-            case 1:
+        int breakdownSpeed = 0;
+        if (breakdownTurnsLeft == 1) {
                 normalSpeed = breakdownSpeed;
                 breakdownTurnsLeft--;
-                break;
-            default:
-                isBreakDown = Main.getRandom(0, 100) <= 5; // "5" is the predefined probability"
-                if (isBreakDown) {
-                    normalSpeed = breakdownSpeed;
-                    breakdownTurnsLeft = 1;
-                } else {
-                    normalSpeed = 100;
-                    breakdownTurnsLeft = 0;
-                }
-                break;
+        } else {
+            isBreakDown = Main.getRandom(0, 100) <= 5; // "5" is the predefined probability"
+            if (isBreakDown) {
+                normalSpeed = breakdownSpeed;
+                breakdownTurnsLeft = 1;
+            } else {
+                normalSpeed = 100;
+                breakdownTurnsLeft = 0;
+            }
         }
-
     }
 
 
-
+    // The vehicle travels for an hour. It increases the distance traveled. Call this from the main class only!
     void moveForAnHour () {
         distanceTraveled += normalSpeed;
     }

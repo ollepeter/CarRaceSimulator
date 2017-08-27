@@ -24,7 +24,7 @@ class Car {
     }
 
 
-    void setSpeedLimit(boolean isRaining, int speedLimit ) {
+    void setSpeedLimit(boolean isRaining, int speedLimit) {
         if (isRaining) {
             normalSpeed = speedLimit;
         } else {
@@ -32,7 +32,7 @@ class Car {
         }
     }
 
-
+    // The vehicle travels for an hour. It increases the distance traveled. Call this from the main class only!
     void moveForAnHour () {
         distanceTraveled += normalSpeed;
     }

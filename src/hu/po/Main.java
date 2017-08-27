@@ -8,8 +8,8 @@ import java.util.Random;
 
 
 public class Main {
-    static final int NUMRACERS = 1;
-    private static final int RACELENGTH = 100;
+    static final int NUMRACERS = 10;
+    private static final int RACELENGTH = 50;
     private static final int SPEEDLIMIT = 70;
 
     private static Car[] listOfCars;
@@ -42,7 +42,8 @@ public class Main {
     }
 
 
-
+    /** Simulates the race by calling moveForAnHour() on every vehicle RACELENGTH times
+        and setting whether its raining.*/
     private static void simulateRace() {
         for (int hour = 1; hour <= RACELENGTH; hour++) {
             boolean isRaining = getRandom(0, 100) <= 30; // "30" is the predefined probability"
@@ -67,7 +68,7 @@ public class Main {
 
     }
 
-
+    /** Show the result after each hour */
     private static void printActualRaceResult(int hour, boolean isRaining) {
         String roadCondition;
         String carSpeedLimit;
@@ -84,6 +85,7 @@ public class Main {
         System.out.printf("Road condition          -> %s \n", roadCondition);
         System.out.printf("CARs Speed limit        -> %s \n", carSpeedLimit);
         System.out.printf("MOTORCYCLEs Speed limit -> %s \n\n", motorcycleSpeedLimit);
+
         System.out.println("CARS:");
         for (Car car : listOfCars) {
             System.out.printf("%-22s %3d %-8s %4d %-2s\n",
@@ -116,9 +118,10 @@ public class Main {
                     "km");
         }
         System.out.println();
+
     }
 
-
+    /** Prints each vehicle's name, distance traveled and type. */
     private static void printRaceResult() {
         System.out.println("!!! END OF RACE !!!\n");
 
@@ -157,7 +160,7 @@ public class Main {
     }
 
 
-    /**Get a random integer in the given range*/
+    /** Get a random integer in the given range */
     static int getRandom(int low, int high) {
         int randNum;
         Random rand = new Random();
@@ -166,7 +169,7 @@ public class Main {
     }
 
 
-    /**Bubble reversed sort List*/
+    /** Bubble reversed sort List */
     private static ArrayList<ArrayList<String>> bubbleSort (ArrayList<ArrayList<String>> resultList) {
         for (int i = 0; i < resultList.size() - 1; i++) {
             for (int k = i + 1; k < resultList.size(); k++) {

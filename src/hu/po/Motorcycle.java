@@ -17,23 +17,14 @@ class Motorcycle {
 
 
     void setSpeed(boolean isRaining) {
+        speed = 100;
         if (isRaining) {
             speed -= Main.getRandom(5, 50);
-        } else {
-            speed = 100;
         }
     }
 
-
+    // The vehicle travels for an hour. It increases the distance traveled. Call this from the main class only!
     void moveForAnHour () {
         distanceTraveled += speed;
     }
-
-
-
-
-
-
-
-
 }
